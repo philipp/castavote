@@ -1,0 +1,8 @@
+<p>
+  <b>Question:</b>
+  <%=h @question.question %>
+</p>
+
+
+<%= link_to 'Edit', edit_company_event_question_path(@company, @event, @question) %> |
+<%= link_to 'Back', company_event_path(@company, @event) %>

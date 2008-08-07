@@ -1,0 +1,16 @@
+<h1>Editing question</h1>
+
+<% form_for(@question, :url => company_event_question_path(@company, @event, @question)) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :question %><br />
+    <%= f.text_field :question %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', company_event_question_path(@company, @event, @question)  %> |
+<%= link_to 'Back', company_event_path(@company, @event) %>
