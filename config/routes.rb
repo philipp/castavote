@@ -1,7 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
 
+
   map.resources :companies do |company|
-    company.resources :events
+    company.resources :events do |event|
+      event.resources :questions      
+    end
   end
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
