@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  date: 2008-08-07 13:49:49
+  company_id: 1
+
+two:
+  name: MyString
+  date: 2008-08-07 13:49:49
+  company_id: 1

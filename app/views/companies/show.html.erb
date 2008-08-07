@@ -6,3 +6,34 @@
 
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>
+
+
+
+
+<h1>Listing events</h1>
+
+<%= link_to "Add New Event", new_company_event_path(@company) %>
+	
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+  </tr>
+
+<% for event in @company.events %>
+  <tr>
+    <td><%=h event.name %></td>
+    <td><%=h event.date %></td>
+    <td><%= link_to 'Show', company_event_path(@company, event) %></td>
+    <td><%= link_to 'Edit', edit_company_event_path(@company, event) %></td>
+
+
+    <td>
+<%= link_to 'Destroy', company_event_url(@company, event), :confirm => 'Are you sure?', :method => :delete %>
+
+
+</td>
+  </tr>
+<% end %>
+</table>
+
