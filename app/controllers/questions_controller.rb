@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :login_required
+
   before_filter :resolve_company_event
 
   # GET /questions

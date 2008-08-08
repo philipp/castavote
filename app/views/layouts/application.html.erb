@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title>Companies: <%= controller.action_name %></title>
+	<%= stylesheet_link_tag 'scaffold' %>
+</head>
+<body>
+
+	<div id="logout">
+		<%if logged_in?%>					
+		<%= link_to "logout", logout_path %>&nbsp;<%=current_user.login%>	
+		<%else%>			
+		<%= link_to "login", new_sessions_path %>
+		<%end%>
+	</div>
+
+
+	<div id="content">
+		<p style="color: green"><%= flash[:notice] %></p>
+
+		<%= yield  %>
+	</div>
+	<div id="footer">
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
+		<div>
+			© 2008
+		</div>
+	</div>
+
+</body>
+</html>
