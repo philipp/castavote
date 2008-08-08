@@ -18,6 +18,8 @@
 <table>
   <tr>
     <th>Question</th>
+	<th colspan="6"/>
+    <th>Total Score</th>
   </tr>
 
 <% for question in @event.questions %>
@@ -26,6 +28,29 @@
     <td><%= link_to 'Show', company_event_question_path(@company, @event, question) %></td>
     <td><%= link_to 'Edit', edit_company_event_question_path(@company, @event, question) %></td>
     <td><%= link_to 'Destroy', company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete %></td>
+	<td>
+		<%= link_to_remote image_tag ("/images/down.png", :border=>0,:width=>25, :height=>25), 
+			:url => {
+				:controller => :home, :action => :shrink_picture, :id => question
+			}
+		%>
+	</td>	
+	<td>
+		<%= link_to_remote image_tag ("/images/none.png", :border=>0,:width=>25, :height=>25), 
+			:url => {
+				:controller => :home, :action => :shrink_picture, :id => question
+			}
+		%>
+	</td>	
+	<td>
+		<%= link_to_remote image_tag ("/images/up.png", :border=>0,:width=>25, :height=>25), 
+			:url => {
+				:controller => :home, :action => :shrink_picture, :id => question
+			}
+		%>
+	</td>	
+	<td>
+	</td>
   </tr>
 <% end %>
 </table>
