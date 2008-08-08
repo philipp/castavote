@@ -18,6 +18,7 @@ class EventsController < ApplicationController
   # GET /events/1.xml
   def show
     @event = Event.find(params[:id])
+    @questions = @event.questions.paginate(:page => 1, :page => params[:page], :per_page => 10, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # show.html.erb

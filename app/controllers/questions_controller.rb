@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         flash[:notice] = 'Question was successfully created.'
-        format.html { redirect_to( company_event_question_url(@company, @event, @question)) }
+        format.html { redirect_to( company_event_url(@company, @event)) }
         format.xml  { render :xml => @question, :status => :created, :location => @question }
       else
         format.html { render :action => "new" }

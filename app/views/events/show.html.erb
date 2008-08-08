@@ -1,6 +1,10 @@
 <p>
-  <b>Name:</b>
-  <%=h @event.name %>
+  <h1>Company Name: <%=h @company.name %></h1>
+</p>
+
+
+<p>
+  <h2>Event Name: <%=h @event.name %></h2>
 </p>
 
 <p>
@@ -14,19 +18,18 @@
 
 
 <h1>Listing questions</h1>
-<%= link_to "Add New Question", new_company_event_question_path(@company, @event) %>
+<%= will_paginate @questions %>
 <table>
   <tr>
     <th>Question</th>
-	<th colspan="6"/>
+	<th colspan="5"/>
     <th>Score</th>
     <th>Voted</th>
   </tr>
 
-<% for question in @event.questions %>
+<% for question in @questions %>
   <tr>
-    <td><%=h question.question %></td>
-    <td><%= link_to 'Show', company_event_question_path(@company, @event, question) %></td>
+    <td><%= link_to((h question.question) , company_event_question_path(@company, @event, question)) %></td>
     <td><%= link_to 'Edit', edit_company_event_question_path(@company, @event, question) %></td>
     <td><%= link_to image_tag ("trash.gif", :border => 0, :width => 16, :height => 16), company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete %></td>
 	<td><%= link_to image_tag ("/images/down.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, question, :value => "-1") %></td>	
@@ -41,3 +44,7 @@
   </tr>
 <% end %>
 </table>
+<%= will_paginate @questions %>
+
+<%= link_to image_tag ("add.gif", :border => 0, :width => 16, :height => 16), new_company_event_question_path(@company, @event) %>
+<%= link_to "Add New Question", new_company_event_question_path(@company, @event) %>
