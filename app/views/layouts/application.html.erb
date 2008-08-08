@@ -19,8 +19,8 @@
 
 
 	<div id="content">
+		<p style="color: red"><%= flash[:error] %></p>
 		<p style="color: green"><%= flash[:notice] %></p>
-
 		<%= yield  %>
 	</div>
 	<div id="footer">

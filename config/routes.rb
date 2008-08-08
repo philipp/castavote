@@ -3,7 +3,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :companies do |company|
     company.resources :events do |event|
-      event.resources :questions      
+      event.resources :questions, 
+        :member => {:update_score => :get}                  
     end
   end
 

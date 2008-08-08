@@ -87,6 +87,30 @@ class QuestionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def update_score
+    @question = @event.questions.find(params[:id])
+    @value = params[:value]
+    vote = Vote.new
+    vote.user = current_user
+    vote.question = @question
+    vote.score = @value
+    vote.save
+  
+    @question.score = Vote.sum(:score, :conditions => ["question_id = ?", @question])*100 / Vote.count(:score, :conditions => ["question_id = ?", @question])
+    @question.save
+    
+    
+    if vote.save
+      flash[:notice] = 'You voted successfully.'
+    else
+      flash[:error] = "Can't vote more then onece."
+    end
+    redirect_to( company_event_url(@company, @event)) 
+    
+  end  
+
+  
 protected
   def resolve_company_event
     @company = Company.find(params[:company_id])
