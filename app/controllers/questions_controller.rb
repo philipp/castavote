@@ -91,20 +91,20 @@ class QuestionsController < ApplicationController
   def update_score
     @question = @event.questions.find(params[:id])
     @value = params[:value]
-    vote = Vote.new
-    vote.user = current_user
-    vote.question = @question
-    vote.score = @value
-    vote.save
-  
-    @question.score = Vote.sum(:score, :conditions => ["question_id = ?", @question])*100 / Vote.count(:score, :conditions => ["question_id = ?", @question])
-    @question.save
-    
-    
-    if vote.save
+    user_votes = Vote.count(:score, :conditions => ["question_id = ? and user_id = ?", @question, current_user])
+    if(user_votes == 0)
+      #create new vote
+      vote = Vote.new
+      vote.user = current_user
+      vote.question = @question
+      vote.score = @value
+      vote.save
+      #update score in question
+      @question.score = Vote.sum(:score, :conditions => ["question_id = ?", @question])*100 / Vote.count(:score, :conditions => ["question_id = ?", @question])
+      @question.save    
       flash[:notice] = 'You voted successfully.'
     else
-      flash[:error] = "Can't vote more then onece."
+      flash[:error] = "Can't vote more then once."
     end
     redirect_to( company_event_url(@company, @event)) 
     
