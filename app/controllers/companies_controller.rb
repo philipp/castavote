@@ -5,8 +5,8 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.xml
   def index
-    @companies = Company.find(:all)
-    
+    @companies = Company.paginate(:page => 1, :page => params[:page], :order => "name DESC")
+        
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @companies }
