@@ -19,7 +19,8 @@
   <tr>
     <th>Question</th>
 	<th colspan="6"/>
-    <th>Total Score</th>
+    <th>Score</th>
+    <th>Voted</th>
   </tr>
 
 <% for question in @event.questions %>
@@ -33,6 +34,9 @@
 	<td><%= link_to image_tag ("/images/up.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, question, :value => "1") %></td>	
 	<td>
 		<%= question.score %>
+	</td>
+	<td>
+		<%= question.votes(:refresh).size %>
 	</td>
   </tr>
 <% end %>

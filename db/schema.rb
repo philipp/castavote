@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080808153654) do
+ActiveRecord::Schema.define(:version => 20080808190319) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(:version => 20080808153654) do
 
   create_table "questions", :force => true do |t|
     t.string   "question"
-    t.integer  "event_id",   :limit => 11
+    t.integer  "event_id",    :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "score",      :limit => 11
+    t.integer  "score",       :limit => 11
+    t.integer  "votes_count", :limit => 11, :default => 0
   end
 
   create_table "users", :force => true do |t|

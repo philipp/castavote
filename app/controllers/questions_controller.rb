@@ -94,9 +94,9 @@ class QuestionsController < ApplicationController
     user_votes = Vote.count(:score, :conditions => ["question_id = ? and user_id = ?", @question, current_user])
     if(user_votes == 0)
       #create new vote
-      vote = Vote.new
+      
+      vote = @question.votes.create
       vote.user = current_user
-      vote.question = @question
       vote.score = @value
       vote.save
       #update score in question
