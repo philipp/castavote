@@ -1,6 +1,6 @@
 <p>
-  <b>Name:</b>
-  <%=h @company.name %>
+  <h1>Company Name: <%=h @company.name %></h1>
+
 </p>
 
 
@@ -10,9 +10,9 @@
 
 
 
-<h1>Listing events</h1>
+<h2>Listing events</h2>
 
-<%= link_to "Add New Event", new_company_event_path(@company) %>
+<%= will_paginate @events %>
 	
 <table>
   <tr>
@@ -20,14 +20,16 @@
     <th>Date</th>
   </tr>
 
-<% for event in @company.events %>
+<% for event in @events %>
   <tr>
-    <td><%=h event.name %></td>
+    <td><%= link_to((h event.name), company_event_path(@company, event)) %></td>
     <td><%=h event.date %></td>
-    <td><%= link_to 'Show', company_event_path(@company, event) %></td>
     <td><%= link_to 'Edit', edit_company_event_path(@company, event) %></td>
     <td><%= link_to image_tag ("trash.gif", :border => 0, :width => 16, :height => 16), company_event_url(@company, event), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
+<%= will_paginate @events %>
 
+<%= link_to image_tag ("add.gif", :border => 0, :width => 16, :height => 16), new_company_event_path(@company) %>
+<%= link_to "Add New Event", new_company_event_path(@company) %>
