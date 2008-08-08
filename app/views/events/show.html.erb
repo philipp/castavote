@@ -28,7 +28,7 @@
     <td><%=h question.question %></td>
     <td><%= link_to 'Show', company_event_question_path(@company, @event, question) %></td>
     <td><%= link_to 'Edit', edit_company_event_question_path(@company, @event, question) %></td>
-    <td><%= link_to 'Destroy', company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag ("trash.gif", :border => 0, :width => 16, :height => 16), company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete %></td>
 	<td><%= link_to image_tag ("/images/down.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, question, :value => "-1") %></td>	
 	<td><%= link_to image_tag ("/images/none.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, question, :value => "0") %></td>	
 	<td><%= link_to image_tag ("/images/up.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, question, :value => "1") %></td>	
