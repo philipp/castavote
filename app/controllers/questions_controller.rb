@@ -29,6 +29,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new.xml
   def new
     @question = Question.new
+    2.times {@question.answers.build}
 
     respond_to do |format|
       format.html # new.html.erb

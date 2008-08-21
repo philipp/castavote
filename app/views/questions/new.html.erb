@@ -7,6 +7,14 @@
     <%= f.label :question %><br />
     <%= f.text_field :question %>
   </p>
+
+
+	<div id="answers">
+		<%= render :partial => 'answer', :collection => @question.answers %>
+	</div>
+
+	<p><%= add_answer_link "Add an answer" %></p>
+
   <p>
     <%= f.submit "Create" %>
   </p>

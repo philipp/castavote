@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080808190319) do
+ActiveRecord::Schema.define(:version => 20080820225221) do
+
+  create_table "answers", :force => true do |t|
+    t.string   "value"
+    t.integer  "question_id", :limit => 11
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -32,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20080808190319) do
     t.datetime "updated_at"
     t.integer  "score",       :limit => 11
     t.integer  "votes_count", :limit => 11, :default => 0
+    t.boolean  "active",                    :default => false, :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -49,9 +57,9 @@ ActiveRecord::Schema.define(:version => 20080808190319) do
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
   create_table "votes", :force => true do |t|
-    t.integer  "user_id",     :limit => 11
-    t.integer  "question_id", :limit => 11
-    t.integer  "score",       :limit => 11
+    t.integer  "user_id",    :limit => 11
+    t.integer  "answer_id",  :limit => 11
+    t.integer  "score",      :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
