@@ -91,7 +91,7 @@ class QuestionsController < ApplicationController
   
   def update_score
     @question = @event.questions.find(params[:id])
-    @value = params[:value]
+    @answer = @question.find(params[:answer_id])
     user_votes = Vote.count(:score, :conditions => ["question_id = ? and user_id = ?", @question, current_user])
     if(user_votes == 0)
       #create new vote

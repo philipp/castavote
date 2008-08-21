@@ -3,6 +3,11 @@
   <%=h @question.question %>
 </p>
 
-
-<%= link_to 'Edit', edit_company_event_question_path(@company, @event, @question) %> |
+	<% @question.answers.each do |answer|%>
+	    <p>
+			<%= link_to image_tag ("/images/up.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer) %>
+	 	
+			<%= h answer.value%>
+		</p>
+	<%end%>
 <%= link_to 'Back', company_event_path(@company, @event) %>

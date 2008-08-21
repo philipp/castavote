@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20080820225221) do
   create_table "votes", :force => true do |t|
     t.integer  "user_id",    :limit => 11
     t.integer  "answer_id",  :limit => 11
-    t.integer  "score",      :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score",      :limit => 11
   end
 
 end
