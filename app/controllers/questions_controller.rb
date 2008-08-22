@@ -110,7 +110,20 @@ class QuestionsController < ApplicationController
       flash[:error] = "Can't vote more then once."
     end
     redirect_to( company_event_question_url(@company, @event, @question)) 
-    
+  end  
+
+  def open_voting
+    @question = @event.questions.find(params[:id])
+    @question.active = true
+    @question.save
+    redirect_to company_event_question_url(@company, @event, @question)
+  end  
+
+  def close_voting
+    @question = @event.questions.find(params[:id])
+    @question.active = false
+    @question.save
+    redirect_to company_event_question_url(@company, @event, @question)
   end  
 
   

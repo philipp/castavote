@@ -3,12 +3,18 @@
   <%=h @question.question %>
 </p>
 
+<%= link_to_if !@question.active, "open", open_voting_company_event_question_path(@company, @event, @question), :method => :put %>
+<%= link_to_if @question.active, "close", close_voting_company_event_question_path(@company, @event, @question), :method => :put %>
+
+
+
 	<% @question.answers.each do |answer|%>
 	    <p>
 			<% unless @question.active %>
 				<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>		
+			<%else%>
+				<%= link_to_if @question.active, image_tag ("/images/up.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
 			<%end%>
-			<%= link_to_if @question.active, image_tag ("/images/up.png", :border=>0,:width=>25, :height=>25), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
 			<%= h answer.value%>
 		</p>
 	<%end%>
