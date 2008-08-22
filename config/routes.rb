@@ -1,9 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :answers
 
-
-
-  map.resources :companies do |company|
+  map.resources :companies do |company|    
     company.resources :events do |event|
       event.resources :questions, 
         :member => {:update_score => :post,
@@ -11,6 +9,8 @@ ActionController::Routing::Routes.draw do |map|
                     :close_voting => :put}                  
     end
   end
+  map.resources :companies,
+    :member => {:join => :post }
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

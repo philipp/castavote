@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080821002820) do
+ActiveRecord::Schema.define(:version => 20080822004444) do
 
   create_table "answers", :force => true do |t|
     t.string   "value"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(:version => 20080821002820) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "joining_code"
   end
+
+  add_index "companies", ["joining_code"], :name => "index_companies_on_joining_code"
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -32,6 +35,17 @@ ActiveRecord::Schema.define(:version => 20080821002820) do
     t.datetime "updated_at"
   end
 
+  create_table "profiles", :force => true do |t|
+    t.integer  "company_id", :limit => 11, :null => false
+    t.integer  "user_id",    :limit => 11, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "profiles", ["company_id", "user_id"], :name => "index_profiles_on_company_id_and_user_id", :unique => true
+  add_index "profiles", ["company_id"], :name => "index_profiles_on_company_id"
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+
   create_table "questions", :force => true do |t|
     t.string   "question"
     t.integer  "event_id",    :limit => 11
@@ -39,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20080821002820) do
     t.datetime "updated_at"
     t.integer  "votes_count", :limit => 11, :default => 0
     t.boolean  "active",                    :default => false, :null => false
-    t.integer  "score",       :limit => 11
   end
 
   create_table "users", :force => true do |t|

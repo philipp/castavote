@@ -1,6 +1,14 @@
 <p>
   <h1>Company Name: <%=h @company.name %></h1>
-
+</p>
+<p>
+	Email following link to all the people you want to be able to participate in polls for <%=h @company.name%>
+	<br/>
+	<b>
+	<%=url_for join_company_url(@company)%>?joining_code=<%=@company.joining_code%>&amp;method=post
+	</b>
+	<%=link_to join_company_url(@company), :joining_code => @company.joining_code, :method => :post%>
+	
 </p>
 
 
