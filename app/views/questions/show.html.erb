@@ -3,8 +3,8 @@
   <%=h @question.question %>
 </p>
 
-<%= link_to_if !@question.active, "open", open_voting_company_event_question_path(@company, @event, @question), :method => :put %>
-<%= link_to_if @question.active, "close", close_voting_company_event_question_path(@company, @event, @question), :method => :put %>
+<%= link_to_if !@question.active, "activate", open_voting_company_event_question_path(@company, @event, @question), :method => :put %>
+<%= link_to_if @question.active, "deactivate", close_voting_company_event_question_path(@company, @event, @question), :method => :put %>
 
 
 

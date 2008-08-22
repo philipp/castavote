@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.xml
   def index
-    @companies = Company.paginate(:page => 1, :page => params[:page], :order => "name DESC")
+    @companies = current_user.companies.paginate(:page => 1, :page => params[:page], :order => "name DESC")
         
     respond_to do |format|
       format.html # index.html.erb
@@ -47,9 +47,14 @@ class CompaniesController < ApplicationController
   # POST /companies.xml
   def create
     @company = Company.new(params[:company])
+    @profile = Profile.new
 
     respond_to do |format|
       if @company.save
+        @profile.company = @company
+        @profile.user = current_user
+        @profile.save
+        
         flash[:notice] = 'Company was successfully created.'
         format.html { redirect_to(@company) }
         format.xml  { render :xml => @company, :status => :created, :location => @company }
@@ -88,4 +93,32 @@ class CompaniesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def generate_new_joining_code
+    @company = Company.find(params[:id])
+    @company.generate_new_joining_code
+    @company.save
+    flash[:notice] = 'New Joining Code was successfully generated.'
+    redirect_to(@company)    
+  end
+  
+  
+  def join
+    @company = Company.find_by_id_and_joining_code(params[:id], params[:joining_code])
+    if @company
+      if Profile.find_by_company_id_and_user_id(@company.id, current_user.id)
+        flash[:notice] = 'Already joined.'
+      else
+        @profile = Profile.new
+        @profile.company = @company
+        @profile.user = current_user
+        @profile.save
+        flash[:notice] = 'Successfully joined the company -- ' + @company.name + "."      
+      end
+    else
+      flash[:error] = 'No company found.'
+    end
+    redirect_to companies_url
+  end
+  
 end
