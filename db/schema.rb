@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080820225221) do
+ActiveRecord::Schema.define(:version => 20080821002820) do
 
   create_table "answers", :force => true do |t|
     t.string   "value"
@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(:version => 20080820225221) do
     t.integer  "event_id",    :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "score",       :limit => 11
     t.integer  "votes_count", :limit => 11, :default => 0
     t.boolean  "active",                    :default => false, :null => false
+    t.integer  "score",       :limit => 11
   end
 
   create_table "users", :force => true do |t|
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(:version => 20080820225221) do
     t.integer  "answer_id",  :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "score",      :limit => 11
   end
 
 end

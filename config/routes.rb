@@ -6,7 +6,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :companies do |company|
     company.resources :events do |event|
       event.resources :questions, 
-        :member => {:update_score => :get}                  
+        :member => {:update_score => :post,
+                    :open_voting => :put,
+                    :close_voting => :put}                  
     end
   end
 
