@@ -9,8 +9,8 @@
 	<% for company in @companies %>
 	<tr>
 		<td><%= link_to((h(company.name)), company) %></td>
-		<td><%= link_to 'Edit', edit_company_path(company) %></td>
-		<td><%= link_to image_tag ("trash.gif", :border => 0, :width => 16, :height => 16), company, :confirm => 'Are you sure?', :method => :delete %></td>
+		<td><%= link_to image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_path(company) %></td>
+		<td><%= link_to image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company, :confirm => 'Are you sure?', :method => :delete %></td>
 	</tr>
 	<% end %>
 </table>
@@ -18,5 +18,4 @@
 
 <br />
 
-<%= link_to image_tag ("add.gif", :border => 0, :width => 16, :height => 16), new_company_path %>
-<%= link_to 'New company', new_company_path %>
+<%= link_to image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_path %>
