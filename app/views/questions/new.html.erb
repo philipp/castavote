@@ -13,11 +13,11 @@
 		<%= render :partial => 'answer', :collection => @question.answers %>
 	</div>
 
-	<p><%= add_answer_link "Add an answer" %></p>
+	<p><%= add_answer_link image_tag("add.png", :border => 0, :width => 16, :height => 16) %></p>
 
   <p>
     <%= f.submit "Create" %>
   </p>
 <% end %>
 
-<%= link_to 'Back', company_event_path(@company, @event)  %>
+<%= link_to image_tag("back.png", :border => 0, :width => 16, :height => 16), company_event_path(@company, @event)  %>

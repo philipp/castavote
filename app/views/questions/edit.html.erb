@@ -12,5 +12,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', company_event_question_path(@company, @event, @question)  %> |
-<%= link_to 'Back', company_event_path(@company, @event) %>
+<%= link_to image_tag("show.png", :border => 0, :width => 16, :height => 16), company_event_question_path(@company, @event, @question)  %>
+<%= link_to image_tag("back.png", :border => 0, :width => 16, :height => 16), company_event_path(@company, @event) %>

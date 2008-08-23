@@ -10,13 +10,13 @@
   <tr>
     <td><%=h question.question %></td>
     <td><%=h question.event %></td>
-    <td><%= link_to 'Show', question %></td>
-    <td><%= link_to 'Edit', edit_question_path(question) %></td>
-    <td><%= link_to image_tag ("trash.gif", :border => 0, :width => 16, :height => 16), question, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag("show.png", :border => 0, :width => 16, :height => 16), question %></td>
+    <td><%= link_to image_tag("edit.png", :border => 0, :width => 16, :height => 16), edit_question_path(question) %></td>
+    <td><%= link_to image_tag ("trash.png", :border => 0, :width => 16, :height => 16), question, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New question', new_question_path %>
+<%= link_to image_tag("add.png", :border => 0, :width => 16, :height => 16), new_question_path %>

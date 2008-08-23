@@ -13,8 +13,8 @@
 </p>
 
 
-<%= link_to 'Edit', edit_company_event_path(@company, @event) %> |
-<%= link_to 'Back', company_path(@company) %>
+<%= link_to image_tag ("back.png", :border => 0, :width => 16, :height => 16), company_path(@company) %>
+<%= link_to image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, @event) %> 
 
 
 <h1>Listing questions</h1>
@@ -34,5 +34,4 @@
 </table>
 <%= will_paginate @questions %>
 
-<%= link_to image_tag ("add.gif", :border => 0, :width => 16, :height => 16), new_company_event_question_path(@company, @event) %>
-<%= link_to "Add New Question", new_company_event_question_path(@company, @event) %>
+<%= link_to image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_question_path(@company, @event) %>

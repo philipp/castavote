@@ -2,7 +2,7 @@
 	<% fields_for "question[answer_attributes][]", answer do |answer_form| %>
 	<p>
 		Answer: <%= answer_form.text_field :value %>
-		<%= link_to_function "remove", "$(this).up('.answer').remove()" %>
+		<%= link_to_function image_tag("trash.png", :border => 0, :width => 16, :height => 16), "$(this).up('.answer').remove()" %>
 	</p>
 	<% end %>
 </div>
