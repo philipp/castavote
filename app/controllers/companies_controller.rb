@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.xml
   def show
-    @company = Company.find(params[:id])
+    @company = current_user.companies.find(params[:id])
 
     @events = @company.events.paginate(:page => 1, :page => params[:page], :per_page => 10, :order => "date DESC")
     
@@ -40,7 +40,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    @company = Company.find(params[:id])
+    @company = current_user.companies.find(params[:id])
   end
 
   # POST /companies
@@ -68,7 +68,7 @@ class CompaniesController < ApplicationController
   # PUT /companies/1
   # PUT /companies/1.xml
   def update
-    @company = Company.find(params[:id])
+    @company = current_user.companies.find(params[:id])
 
     respond_to do |format|
       if @company.update_attributes(params[:company])
@@ -85,7 +85,7 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   # DELETE /companies/1.xml
   def destroy
-    @company = Company.find(params[:id])
+    @company = current_user.companies.find(params[:id])
     @company.destroy
 
     respond_to do |format|
@@ -95,7 +95,7 @@ class CompaniesController < ApplicationController
   end
   
   def generate_new_joining_code
-    @company = Company.find(params[:id])
+    @company = current_user.companies.find(params[:id])
     @company.generate_new_joining_code
     @company.save
     flash[:notice] = 'New Joining Code was successfully generated.'

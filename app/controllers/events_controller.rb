@@ -95,6 +95,6 @@ class EventsController < ApplicationController
   
 protected
   def resolve_company
-    @company = Company.find(params[:company_id])    
+    @company = current_user.companies.find(params[:company_id])    
   end  
 end

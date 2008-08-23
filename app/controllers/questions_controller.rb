@@ -129,7 +129,7 @@ class QuestionsController < ApplicationController
   
 protected
   def resolve_company_event
-    @company = Company.find(params[:company_id])
+    @company = current_user.companies.find(params[:company_id])
     @event = @company.events.find(params[:event_id])
   end
 end
