@@ -40,6 +40,26 @@ class User < ActiveRecord::Base
     u && u.authenticated?(password) ? u : nil
   end
 
+  def add_to_preallowed
+    self.preallowed_id = find_or_create_preallowed_id
+    self.save
+  end
+
+  #this methods will try to find a subject in preallowed by login, or will create a new one, will return a preallowed_id or nil
+  def find_or_create_preallowed_id
+    # first lets see if such seubject already eixst to avoid dups
+    preallowed_id = Client.find(CLIENT_ID).get(:subject_id_from_name, :subject_name => login)
+        
+    if preallowed_id != nil and preallowed_id != "0"
+      return preallowed_id
+    end
+    
+    #otherwise create a new one
+    subject = Subject.create(:name => self.login)
+    return subject.id
+  end
+
+
   protected
     
 

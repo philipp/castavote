@@ -64,4 +64,17 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+
+
 end
+
+
+# Include your application configuration below
+# these credentials are not real, ask a preallowed admin for the login/password to use in local configuration
+PREALLOWED_LOGIN = 'castavote'
+PREALLOWED_PASSWORD = 'castavote'
+
+CLIENT_ID = "8"
+ADMIN_ROLE_ID = "16"
+PREALLOWED_HOST = "http://www.preallowed.com"
+CLIENTS_URI = PREALLOWED_HOST + "/clients/" + CLIENT_ID

@@ -20,6 +20,8 @@ class SessionsController < ApplicationController
       handle_remember_cookie! new_cookie_flag
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
+      # check preallowed_id and resolve if necessery
+      current_user.add_to_preallowed if current_user.preallowed_id == nil || current_user.preallowed_id == 0      
     else
       note_failed_signin
       @login       = params[:login]

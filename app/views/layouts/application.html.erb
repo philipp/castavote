@@ -13,7 +13,7 @@
 
 	<div id="logout">
 		<%if logged_in?%>					
-		<%= link_to "logout", logout_path %>&nbsp;<%=current_user.login%>	
+		<%= link_to "logout", logout_path %>&nbsp;<%=current_user.login%>&nbsp;<%=current_user.preallowed_id%>
 		<%else%>			
 		<%= link_to "login", new_sessions_path %>
 		<%end%>
