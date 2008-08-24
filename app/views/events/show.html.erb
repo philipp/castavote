@@ -28,7 +28,7 @@
 <% for question in @questions %>
   <tr>
     <td><%= link_to((h question.question) , company_event_question_path(@company, @event, question)) %></td>
-    <td><%= link_to image_tag ("trash.gif", :border => 0, :width => 16, :height => 16), company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
