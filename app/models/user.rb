@@ -59,6 +59,35 @@ class User < ActiveRecord::Base
     return subject.id
   end
 
+  def is_user_in_role(role_id)
+    subject = Subject.find(self.preallowed_id)
+    res = subject.get(:is_subject_in_role, :role_id => role_id)
+    
+    if res == "1"
+      true
+    else
+      false
+    end
+  end
+
+  # return true in case of success, false otherwise
+  def add_user_to_role(role_id)
+    # subject = Subject.find(preallowed_id)
+    role = Role.find(role_id)
+
+    # put :add_subject, :id => role.id, :subject_id => @subject.id, :client_id => @subject.client.id
+    res = role.put(:add_subject, :id => role.id, :subject_id => preallowed_id, :client_id => CLIENT_ID)
+
+    case res
+    when Net::HTTPSuccess, Net::HTTPRedirection
+      logger.debug "successfully added preallowed_user to role"
+      return true
+    else
+      logger.error "error adding preallowed_user to role"        
+      return false
+    end
+  end
+
 
   protected
     

@@ -3,12 +3,14 @@
   <%=h @question.question %>
 </p>
 
+
+<%if(current_user.is_user_in_role(ADMIN_ROLE_ID))%>
 <fieldset>
 	<legend>admin menu</legend>
 		<%= link_to_if !@question.active, "activate", open_voting_company_event_question_path(@company, @event, @question), :method => :put %>
 		<%= link_to_if @question.active, "deactivate", close_voting_company_event_question_path(@company, @event, @question), :method => :put %>
 </fieldset>
-
+<%end%>
 
 	<% @question.answers.each do |answer|%>
 	    <p>

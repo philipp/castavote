@@ -3,7 +3,7 @@
 </p>
 
 <%= link_to image_tag ("back.png", :border => 0, :width => 16, :height => 16), companies_path %>
-<%= link_to image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_path(@company) %>
+<%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_path(@company)) do end %>
 
 <h2>Listing events</h2>
 
@@ -19,17 +19,17 @@
   <tr>
     <td><%= link_to((h event.name), company_event_path(@company, event)) %></td>
     <td><%=h event.date %></td>
-    <td><%= link_to image_tag("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, event) %></td>
-    <td><%= link_to image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_url(@company, event), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, event)) do end %></td>
+    <td><%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_url(@company, event), :confirm => 'Are you sure?', :method => :delete) do end %></td>
   </tr>
 <% end %>
 </table>
 <%= will_paginate @events %>
 
-<%= link_to image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_path(@company) %>
+<%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_path(@company)) do end %>
 
 
-
+<%if current_user.is_user_in_role(ADMIN_ROLE_ID)%>
 <fieldset>
 	<legend>admin menu</legend>
 	Email following link to all the people you want to be able to participate in polls for <i><%=h @company.name%></i>.
@@ -40,3 +40,4 @@
 	<br/>
 	<%=link_to "generate new joining code",  generate_new_joining_code_company_path(@company), :method => :put%>
 </fieldset>
+<%end%>

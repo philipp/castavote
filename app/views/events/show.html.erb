@@ -14,7 +14,7 @@
 
 
 <%= link_to image_tag ("back.png", :border => 0, :width => 16, :height => 16), company_path(@company) %>
-<%= link_to image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, @event) %> 
+<%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, @event)) do end %> 
 
 
 <h1>Listing questions</h1>
@@ -28,10 +28,10 @@
 <% for question in @questions %>
   <tr>
     <td><%= link_to((h question.question) , company_event_question_path(@company, @event, question)) %></td>
-    <td><%= link_to image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_question_url(@company, @event, question), :confirm => 'Are you sure?', :method => :delete) do end %></td>
   </tr>
 <% end %>
 </table>
 <%= will_paginate @questions %>
 
-<%= link_to image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_question_path(@company, @event) %>
+<%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_question_path(@company, @event)) do end %>
