@@ -21,7 +21,9 @@ class SessionsController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
       # check preallowed_id and resolve if necessery
-      current_user.add_to_preallowed if current_user.preallowed_id == nil || current_user.preallowed_id == 0      
+      if(current_user.preallowed_id == nil || current_user.preallowed_id == 0)
+        current_user.add_to_preallowed 
+      end
     else
       note_failed_signin
       @login       = params[:login]
