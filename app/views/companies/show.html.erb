@@ -1,9 +1,24 @@
+<%if current_user.is_user_in_role(ADMIN_ROLE_ID)%>
 <p>
   <h1>Company Name: <%=h @company.name %></h1>
 </p>
 
 <%= link_to image_tag ("back.png", :border => 0, :width => 16, :height => 16), companies_path %>
-<%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_path(@company)) do end %>
+<%= link_to image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_path(@company) %>
+
+
+<fieldset>
+	<legend>admin menu</legend>
+	Email following link to all the people you want to be able to participate in polls for <i><%=h @company.name%></i>.
+	<br/>
+	<b>
+		<%=link_to join_company_url(@company, :joining_code => @company.joining_code), join_company_url(@company, :joining_code => @company.joining_code)%>
+	</b>
+	<br/>
+	<%=link_to "generate new joining code",  generate_new_joining_code_company_path(@company), :method => :put%>
+</fieldset>
+<%end%>
+
 
 <h2>Listing events</h2>
 
@@ -29,15 +44,3 @@
 <%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_path(@company)) do end %>
 
 
-<%if current_user.is_user_in_role(ADMIN_ROLE_ID)%>
-<fieldset>
-	<legend>admin menu</legend>
-	Email following link to all the people you want to be able to participate in polls for <i><%=h @company.name%></i>.
-	<br/>
-	<b>
-		<%=link_to join_company_url(@company, :joining_code => @company.joining_code), join_company_url(@company, :joining_code => @company.joining_code)%>
-	</b>
-	<br/>
-	<%=link_to "generate new joining code",  generate_new_joining_code_company_path(@company), :method => :put%>
-</fieldset>
-<%end%>
