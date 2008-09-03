@@ -19,7 +19,7 @@
 				<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>		
 			<%else%>
 				<%if user_vote%>
-					<%if user_vote.answer == @answer%>
+					<%if user_vote.answer == answer%>
 						image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16)
 					<%end%>
 				<%else%>
