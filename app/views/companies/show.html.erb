@@ -27,13 +27,11 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Date</th>
   </tr>
 
 <% for event in @events %>
   <tr>
     <td><%= link_to((h event.name), company_event_path(@company, event)) %></td>
-    <td><%=h event.date %></td>
     <td><%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, event)) do end %></td>
     <td><%= link_to_if(current_user.is_user_in_role(ADMIN_ROLE_ID), image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_url(@company, event), :confirm => 'Are you sure?', :method => :delete) do end %></td>
   </tr>

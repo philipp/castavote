@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080824212802) do
+ActiveRecord::Schema.define(:version => 20080903205953) do
 
   create_table "answers", :force => true do |t|
     t.string   "value"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20080824212802) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
-    t.datetime "date"
     t.integer  "company_id", :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
