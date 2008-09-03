@@ -13,22 +13,40 @@
 </fieldset>
 <%end%>
 
+<%if @question.active%>
 	<% @question.answers.each do |answer|%>
 	    <p>
-			<% unless @question.active %>
-				<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>		
-			<%else%>
-				<%if user_vote%>
-					<%if user_vote.answer == answer%>
-						<%=image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16)%>
-					<%else%>
-						&nbsp;&nbsp;&nbsp;
-					<%end%>
+			<%if user_vote%>
+				<%if user_vote.answer == answer%>
+					<%=image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16)%>
 				<%else%>
-					<%= link_to image_tag ("/images/vote.png", :border=>0,:width=>16, :height=>48), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
-				<%end%>				
-			<%end%>
+					&nbsp;&nbsp;&nbsp;
+				<%end%>
+			<%else%>
+				<%= link_to image_tag ("/images/vote.jpg", :border=>0), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
+			<%end%>				
 			<%= h answer.value%>
 		</p>
 	<%end%>
+<%else%>
+	<p>
+		
+   <% 
+	i = 0
+	height = @question.answers.length * 50 + 100
+	colors = Array[ "0099FF", "CCCC00", "AFD8F8", "F6BD0F", "FF0000", "006F00"]
+	%>
+	
+   <embed src="/FusionCharts/FCF_Bar2D.swf?chartWidth=800&chartHeight=<%=height%>" 
+flashVars="&dataXML=
+	<graph yAxisName='Votes' showNames='1' decimalPrecision='0' formatNumberScale='0' showBarShadow='1'>
+		<% @question.answers.each do |answer|%>
+			<set name='<%=answer.value%>' value='<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>' showName='1' color='<%=colors[ (i+=1).remainder(colors.size) ]%>'/>			
+		<%end%>
+	</graph>"
+	 quality="high" width="800" height="<%=height%>" name="FCF_Bar2D" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+	</p>
+<%end%>
 <%= link_to image_tag("back.png", :border => 0, :width => 16, :height => 16), company_event_path(@company, @event) %>
+
+
