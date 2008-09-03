@@ -118,7 +118,7 @@ class CompaniesController < ApplicationController
     else
       flash[:error] = 'No company found.'
     end
-    redirect_to companies_url
+    redirect_to @company
   end
   
 end
