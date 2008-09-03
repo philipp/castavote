@@ -25,7 +25,7 @@
 						&nbsp;&nbsp;&nbsp;
 					<%end%>
 				<%else%>
-					<%= link_to_if @question.active, image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
+					<%= link_to image_tag ("/images/vote.png", :border=>0,:width=>16, :height=>48), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
 				<%end%>				
 			<%end%>
 			<%= h answer.value%>
