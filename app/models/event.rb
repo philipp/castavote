@@ -4,7 +4,6 @@ class Event < ActiveRecord::Base
   has_many :questions
     
   validates_presence_of :name
-  validates_presence_of :date
   validates_uniqueness_of :name
   
 end
