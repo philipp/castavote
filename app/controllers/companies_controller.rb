@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
   def show
     @company = current_user.companies.find(params[:id])
 
-    @events = @company.events.paginate(:page => 1, :page => params[:page], :per_page => 10, :order => "date DESC")
+    @events = @company.events.paginate(:page => 1, :page => params[:page], :per_page => 10, :order => "created_at DESC")
     
 
     respond_to do |format|
