@@ -3,6 +3,7 @@
   <%=h @question.question %>
 </p>
 
+<%user_vote = Vote.find(:first, :include => :answer, :conditions => ["answers.question_id = ? and user_id = ?", @question, current_user])%>
 
 <%if(current_user.is_user_in_role(ADMIN_ROLE_ID))%>
 <fieldset>
@@ -17,7 +18,13 @@
 			<% unless @question.active %>
 				<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>		
 			<%else%>
-				<%= link_to_if @question.active, image_tag ("/images/apply.png", :border=>0,:width=>16, :height=>16), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
+				<%if user_vote%>
+					<%if user_vote.answer == @answer%>
+						image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16)
+					<%end%>
+				<%else%>
+					<%= link_to_if @question.active, image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
+				<%end%>				
 			<%end%>
 			<%= h answer.value%>
 		</p>
