@@ -21,6 +21,8 @@
 				<%if user_vote%>
 					<%if user_vote.answer == answer%>
 						<%=image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16)%>
+					<%else%>
+						&nbsp;&nbsp;&nbsp;
 					<%end%>
 				<%else%>
 					<%= link_to_if @question.active, image_tag ("/images/check.png", :border=>0,:width=>16, :height=>16), update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
