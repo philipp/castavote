@@ -43,7 +43,7 @@
 flashVars="&dataXML=
 	<graph yAxisName='Votes' showNames='1' decimalPrecision='0' formatNumberScale='0' showBarShadow='1'>
 		<% @question.answers.each do |answer|%>
-			<set name='<%=answer.value%>' value='<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>' showName='1' color='<%=colors[ (i+=1).remainder(colors.size) ]%>'/>			
+			<set name='<%=h answer.value%>' value='<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>' showName='1' color='<%=colors[ (i+=1).remainder(colors.size) ]%>'/>			
 		<%end%>
 	</graph>"
 	 quality="high" width="800" height="<%=height%>" name="FCF_Bar2D" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
