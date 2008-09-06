@@ -72,7 +72,7 @@ end
 # Include your application configuration below
 # these credentials are not real, ask a preallowed admin for the login/password to use in local configuration
 PREALLOWED_LOGIN = 'castavote'
-PREALLOWED_PASSWORD = 'castavote'
+PREALLOWED_PASSWORD = 'castavote123'
 
 CLIENT_ID = "8"
 PREALLOWED_HOST = "http://www.preallowed.com"
