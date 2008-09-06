@@ -1,0 +1,3 @@
+# page.replace_html dom_id(@user), :partial => 'user', :object => @user
+page[dom_id(@user)].visual_effect :highlight,:startcolor => "#ffffff", :endcolor => "#00af00"
+

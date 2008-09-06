@@ -35,4 +35,11 @@ class Role < ActiveResource::Base
     end
   end
 
+  def self.admin_role(company)
+    puts company.id
+    puts company.name + "_admin"
+    role_id = Client.find(CLIENT_ID).get(:role_id_from_name, :role_name => company.name + "_admin")
+    role = Role.find(role_id)    
+  end
+  
 end

@@ -140,7 +140,14 @@ class CompaniesController < ApplicationController
   end
 
   def toggle_admin
-    user = User.find(params[:id])
+    @user = User.find(params[:id])
+    @company = Company.find(params[:company_id])
+
+    if @user.can_manage_company?(@company)
+      @user.revoke_admin(@company)
+    else
+      @user.promote_to_admin(@company)
+    end
   end
   
 end

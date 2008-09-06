@@ -1,0 +1,5 @@
+<tr id="<%=dom_id(user)%>">
+	<td><%= h(user.login) %></td>
+	<td><%= check_box_tag "toggle_admin_#{user.id}", 1, user.can_manage_company?(@company) ? true : false, :onclick => remote_function(:url =>{ :action => :toggle_admin, :id => user.id, :company_id => @company }) if user != current_user %>
+	</td>
+</tr>

@@ -105,15 +105,13 @@ class User < ActiveRecord::Base
   end
 
   def promote_to_admin(company)
-    role_id = Client.find(CLIENT_ID).get(:role_id_by_name, :role_name => company.name + "_admin")
-    role = Role.find(role_id)
-    @role.add_to_subject(Subject.find(current_user.preallowed_id))      
+    @role = Role.admin_role(company)
+    @role.add_to_subject(Subject.find(self.preallowed_id))      
   end
 
   def revoke_admin(company)
-    role_id = Client.find(CLIENT_ID).get(:role_id_by_name, :role_name => company.name + "_admin")
-    role = Role.find(role_id)
-    @role.remove_from_subject(Subject.find(current_user.preallowed_id))      
+    @role = Role.admin_role(company)    
+    @role.remove_from_subject(Subject.find(self.preallowed_id))      
   end
 
   protected
