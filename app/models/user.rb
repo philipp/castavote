@@ -88,6 +88,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_access_to_resource?(resource_string)      
+      subject = Subject.find(self.preallowed_id)
+      
+      res = subject.get(:has_access, :resource => resource_string)
+
+      if res == "1"
+        true
+      else
+        false
+      end
+  end
+
+  def can_manage_company?(company)
+    has_access_to_resource?("/companies/" + company.id.to_s)      
+  end
 
   protected
     

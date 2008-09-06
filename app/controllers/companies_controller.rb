@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
   # GET /companies.xml
   def index
     @companies = current_user.companies.paginate(:page => 1, :page => params[:page], :order => "name DESC")
-        
+            
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @companies }
@@ -54,6 +54,19 @@ class CompaniesController < ApplicationController
         @profile.company = @company
         @profile.user = current_user
         @profile.save
+
+        @role = Role.new
+        @role.name = @company.name + "_admin"
+        @role.client_id = CLIENT_ID
+        @role.save
+
+        @resource = Resource.new      
+        @resource.name = "^/companies/"  + @company.id.to_s + "($|/.*$)"      
+        @resource.client_id = CLIENT_ID
+        @resource.save
+
+        @role.add_to_resource(@resource)
+        @role.add_to_subject(Subject.find(current_user.preallowed_id))      
         
         flash[:notice] = 'Company was successfully created.'
         format.html { redirect_to(@company) }

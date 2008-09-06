@@ -75,6 +75,5 @@ PREALLOWED_LOGIN = 'castavote'
 PREALLOWED_PASSWORD = 'castavote'
 
 CLIENT_ID = "8"
-ADMIN_ROLE_ID = "16"
 PREALLOWED_HOST = "http://www.preallowed.com"
 CLIENTS_URI = PREALLOWED_HOST + "/clients/" + CLIENT_ID
