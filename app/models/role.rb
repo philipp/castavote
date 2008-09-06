@@ -24,5 +24,15 @@ class Role < ActiveResource::Base
       return false
     end
   end
+  # return true in case of success, false otherwise
+  def remove_from_subject(subject)
+    res = subject.put(:remove_role, :id => subject.id, :role_id => self.id, :client_id => CLIENT_ID)
+    case res
+    when Net::HTTPSuccess, Net::HTTPRedirection
+      return true
+    else
+      return false
+    end
+  end
 
 end

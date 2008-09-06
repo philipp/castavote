@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
   has_many :events
   
   has_many :profiles
-  has_many :users, :through => :profile
+  has_many :users, :through => :profiles
   
   validates_presence_of :name
   validates_uniqueness_of :name

@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email,    :case_sensitive => false
   validates_format_of       :email,    :with => RE_EMAIL_OK, :message => MSG_EMAIL_BAD
 
-  has_many :profile
-  has_many :companies, :through => :profile
+  has_many :profiles
+  has_many :companies, :through => :profiles
   
 
   # HACK HACK HACK -- how to do attr_accessible from here?
@@ -102,6 +102,18 @@ class User < ActiveRecord::Base
 
   def can_manage_company?(company)
     has_access_to_resource?("/companies/" + company.id.to_s)      
+  end
+
+  def promote_to_admin(company)
+    role_id = Client.find(CLIENT_ID).get(:role_id_by_name, :role_name => company.name + "_admin")
+    role = Role.find(role_id)
+    @role.add_to_subject(Subject.find(current_user.preallowed_id))      
+  end
+
+  def revoke_admin(company)
+    role_id = Client.find(CLIENT_ID).get(:role_id_by_name, :role_name => company.name + "_admin")
+    role = Role.find(role_id)
+    @role.remove_from_subject(Subject.find(current_user.preallowed_id))      
   end
 
   protected

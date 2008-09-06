@@ -1,0 +1,17 @@
+<%= will_paginate @users %>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Admin</th>
+	</tr>
+	<% for user in @users %>
+	<tr>
+		<td><%= h(user.login) %></td>
+		<td>x</td>
+	</tr>
+	<% end %>
+</table>
+<%= will_paginate @users %>
+
+
+<%= link_to image_tag ("back.png", :border => 0, :width => 16, :height => 16), @company %>

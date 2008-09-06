@@ -133,5 +133,10 @@ class CompaniesController < ApplicationController
     end
     redirect_to @company
   end
+
+  def users
+    @company = current_user.companies.find(params[:id])
+    @users = @company.users.paginate(:page => 1, :page => params[:page], :order => "name DESC")
+  end
   
 end

@@ -11,7 +11,8 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :companies,
     :member => {:join => :get,
-                :generate_new_joining_code => :put}
+                :generate_new_joining_code => :put,
+                :users => :get}
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

@@ -16,6 +16,8 @@
 	</b>
 	<br/>
 	<%=link_to "generate new joining code",  generate_new_joining_code_company_path(@company), :method => :put%>
+	|
+	<%=link_to "manage users",  users_company_path(@company), :method => :get%>
 </fieldset>
 <%end%>
 
