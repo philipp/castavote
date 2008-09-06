@@ -138,5 +138,9 @@ class CompaniesController < ApplicationController
     @company = current_user.companies.find(params[:id])
     @users = @company.users.paginate(:page => 1, :page => params[:page], :order => "name DESC")
   end
+
+  def toggle_admin
+    user = User.find(params[:id])
+  end
   
 end
