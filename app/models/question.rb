@@ -2,6 +2,8 @@ class Question < ActiveRecord::Base
   belongs_to :event
   
   has_many :answers
+  
+  has_many :votes, :through => :answers
       
   validates_presence_of :question
   validates_uniqueness_of :question

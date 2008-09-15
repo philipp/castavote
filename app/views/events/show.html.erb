@@ -7,7 +7,7 @@
 <%= link_to_if(current_user.can_manage_company?(@company), image_tag ("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, @event)) do end %> 
 
 
-<h1>Listing questions</h1>
+<h1>Questions</h1>
 <%= will_paginate @questions %>
 <table>
   <tr>
