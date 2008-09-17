@@ -63,5 +63,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
   map.home '/', :controller => "home", :action => "index"
+  map.insufficient '/home/insufficient', :controller => "home", :action => "insufficient"
   
 end
