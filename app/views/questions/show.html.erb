@@ -25,7 +25,7 @@
 				&nbsp;&nbsp;&nbsp;
 			<%end%>
 		<%else%>
-			<%= link_to "vote", update_score_company_event_question_path(@company, @event, @question, :answer_id => answer), :method => :post %>
+			<%= link_to "vote", update_score_company_event_question_path(:answer_id => answer), :method => :post %>
 		<%end%>				
 		<%= h answer.value%>
 	</p>
@@ -42,7 +42,7 @@
 	flashVars="&dataXML=
 		<graph yAxisName='Votes' showNames='1' decimalPrecision='0' formatNumberScale='0' showBarShadow='1'>
 			<% @question.answers.each do |answer|%>
-				<set name='<%=answer.value.gsub("'", " ")%>' value='<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>' showName='1' color='<%=cycle "0099FF", "CCCC00", "AFD8F8", "F6BD0F", "FF0000", "006F00"%>'/>			
+				<set name='<%=answer.value.gsub(/['<>&?&#"]/, ' ')%>' value='<%= Vote.count(:all, :conditions => ["answer_id = ?", answer])%>' showName='1' color='<%=cycle "0099FF", "CCCC00", "AFD8F8", "F6BD0F", "FF0000", "006F00"%>'/>			
 			<%end%>
 		</graph>"
 		 quality="high" width="800" height="<%=height%>" name="FCF_Bar2D" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
