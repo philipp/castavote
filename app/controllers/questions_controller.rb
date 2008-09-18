@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
 
 		@xml_data = "<graph yAxisName='Votes' showNames='1' decimalPrecision='0' formatNumberScale='0' showBarShadow='1'>"
 			@question.answers.each do |answer|
-				@xml_data += "<set name='#{answer.escaped_value}' value='#{Vote.count(:all, :conditions => ["answer_id = ?", answer.escaped_value])}' showName='1' color='#{help.cycle "0099FF", "CCCC00", "AFD8F8", "F6BD0F", "FF0000", "006F00"}'/>"			
+				@xml_data += "<set name='#{answer.escaped_value}' value='#{Vote.count(:all, :conditions => ["answer_id = ?", answer.id])}' showName='1' color='#{help.cycle "0099FF", "CCCC00", "AFD8F8", "F6BD0F", "FF0000", "006F00"}'/>"			
 			end
 		@xml_data += "</graph>"
     
