@@ -3,8 +3,8 @@ class Answer < ActiveRecord::Base
 
   @@convert = {
      "&" => "%26amp;",
-     "<" => ".gt.",
-     ">" => ".lt.",
+     "<" => ".lt;",
+     ">" => "%26gt;",
      "'" => "%26apos;",
      '"' => "%26quot;"
   }
