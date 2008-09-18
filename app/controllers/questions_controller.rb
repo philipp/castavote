@@ -3,6 +3,17 @@ class QuestionsController < ApplicationController
 
   before_filter :resolve_company_event
 
+  # the next two methods are needed to include the TextHelper in the controller
+  def help
+    Helper.instance
+  end
+
+  class Helper
+    include Singleton
+    include ActionView::Helpers::TextHelper
+  end
+
+
   # GET /questions
   # GET /questions.xml
   def index
@@ -19,6 +30,12 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
 
+		@xml_data = "<graph yAxisName='Votes' showNames='1' decimalPrecision='0' formatNumberScale='0' showBarShadow='1'>"
+			@question.answers.each do |answer|
+				@xml_data += "<set name='#{answer.escaped_value}' value='#{Vote.count(:all, :conditions => ["answer_id = ?", answer.escaped_value])}' showName='1' color='#{help.cycle "0099FF", "CCCC00", "AFD8F8", "F6BD0F", "FF0000", "006F00"}'/>"			
+			end
+		@xml_data += "</graph>"
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @question }
