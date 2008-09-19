@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem  
   helper :all # include all helpers, all the time
   before_filter :check_preallowed_for_current_request
-  before_filter :has_access, :only => [:edit, :destroy, :create, :update, :new]
+  before_filter :has_write_access, :only => [:edit, :destroy, :create, :update, :new]
   
   
 
@@ -21,17 +21,16 @@ class ApplicationController < ActionController::Base
   private
   
   def check_preallowed_for_current_request
-     @company = current_user.companies.find(params[:company_id]) if !current_user.blank? && !params[:company_id].blank?
-    if(current_user and @company and !current_user.can_manage_company?(@company))      
-      session[:has_access] = true
-    else
-      session[:has_access] = false      
+    if !current_user.blank?    
+      params[:user_has_access_to_resource] = current_user.has_access_to_resource?(request.request_uri)     
+      @company = current_user.companies.find(params[:company_id])                    if !params[:company_id].blank?
+      params[:user_can_manage_company] = current_user.can_manage_company?(@company)  if !@company.blank?      
     end
   end
   
 
-  def has_access
-   if(session[:has_access])      
+  def has_write_access
+   if(!params[:user_can_manage_company])      
      redirect_to insufficient_path
    end
   end

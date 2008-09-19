@@ -1,4 +1,4 @@
-<%if session[:has_access]%>
+<%if params[:user_can_manage_company]%>
 <p>
   <h1>Company Name: <%=h @company.name %></h1>
 </p>
@@ -34,13 +34,13 @@
 <% for event in @events %>
   <tr>
     <td><%= link_to((h event.name), company_event_path(@company, event)) %></td>
-    <td><%= link_to_if(session[:has_access], image_tag("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, event)) do end %></td>
-    <td><%= link_to_if(session[:has_access], image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_url(@company, event), :confirm => 'Are you sure?', :method => :delete) do end %></td>
+    <td><%= link_to_if(params[:user_can_manage_company], image_tag("edit.png", :border => 0, :width => 16, :height => 16), edit_company_event_path(@company, event)) do end %></td>
+    <td><%= link_to_if(params[:user_can_manage_company], image_tag ("trash.png", :border => 0, :width => 16, :height => 16), company_event_url(@company, event), :confirm => 'Are you sure?', :method => :delete) do end %></td>
   </tr>
 <% end %>
 </table>
 <%= will_paginate @events %>
 
-<%= link_to_if(session[:has_access], image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_path(@company)) do end %>
+<%= link_to_if(params[:user_can_manage_company], image_tag ("add.png", :border => 0, :width => 16, :height => 16), new_company_event_path(@company)) do end %>
 
 
