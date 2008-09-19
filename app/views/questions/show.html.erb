@@ -1,4 +1,4 @@
-<%if(current_user.can_manage_company?(@company))%>
+<%if(session[:has_access])%>
 <fieldset>
 	<legend>admin menu</legend>
 		<%= link_to_if !@question.active, "activate", open_voting_company_event_question_path(@company, @event, @question), :method => :put %>
