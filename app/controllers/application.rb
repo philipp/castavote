@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   
 
   def has_access
-    @company = current_user.companies.find(params[:company_id])    
+    @company = current_user.companies.find(params[:company_id]) if !current_user.blank?
    if(current_user and @company and !current_user.can_manage_company?(@company))      
      redirect_to insufficient_path
    end
