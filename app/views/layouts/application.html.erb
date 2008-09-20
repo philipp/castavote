@@ -14,7 +14,7 @@
 	<div id="logout">
 		<%if logged_in?%>					
 		<%= link_to "logout", logout_path %>&nbsp;<%=current_user.login%>
-			<% if params[:user_has_access_to_resource]%>
+			<% if @user_has_access_to_resource%>
 			<font size=-3 style="text-decoration: blink" color="red">admin user</font>
 			<%end%>
 		<%else%>			

@@ -1,5 +1,11 @@
 class CompaniesController < ApplicationController
+  skip_before_filter :check_preallowed_for_current_request
+
   before_filter :login_required
+  
+  before_filter :check_preallowed_for_current_client_request
+  
+
 
   # GET /companies
   # GET /companies.xml
@@ -146,6 +152,16 @@ class CompaniesController < ApplicationController
       @user.revoke_admin(@company)
     else
       @user.promote_to_admin(@company)
+    end
+  end
+
+  private
+
+  def check_preallowed_for_current_client_request
+    if !current_user.blank?    
+      @user_has_access_to_resource = current_user.has_access_to_resource?(request.request_uri)     
+      @company = current_user.companies.find(params[:id])                    if !params[:id].blank?
+      @user_can_manage_company = current_user.can_manage_company?(@company)  if !@company.blank?      
     end
   end
   
