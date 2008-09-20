@@ -71,9 +71,9 @@ end
 
 # Include your application configuration below
 # these credentials are not real, ask a preallowed admin for the login/password to use in local configuration
-PREALLOWED_LOGIN = 'castavote'
-PREALLOWED_PASSWORD = 'castavote123'
+PREALLOWED_LOGIN = 'cleantogether'
+PREALLOWED_PASSWORD = 'cleantogether'
 
-CLIENT_ID = "8"
-PREALLOWED_HOST = "http://www.preallowed.com"
+CLIENT_ID = "2"
+PREALLOWED_HOST = "http://localhost:5000"
 CLIENTS_URI = PREALLOWED_HOST + "/clients/" + CLIENT_ID

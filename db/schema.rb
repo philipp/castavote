@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 20080903205953) do
 
   create_table "answers", :force => true do |t|
     t.string   "value"
-    t.integer  "question_id", :limit => 11
+    t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20080903205953) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
-    t.integer  "company_id", :limit => 11
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20080903205953) do
   add_index "events", ["company_id"], :name => "index_events_on_company_id"
 
   create_table "profiles", :force => true do |t|
-    t.integer  "company_id", :limit => 11, :null => false
-    t.integer  "user_id",    :limit => 11, :null => false
+    t.integer  "company_id", :null => false
+    t.integer  "user_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,11 +52,11 @@ ActiveRecord::Schema.define(:version => 20080903205953) do
 
   create_table "questions", :force => true do |t|
     t.string   "question"
-    t.integer  "event_id",    :limit => 11
+    t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_count", :limit => 11, :default => 0
-    t.boolean  "active",                    :default => false, :null => false
+    t.integer  "votes_count", :default => 0
+    t.boolean  "active",      :default => false, :null => false
   end
 
   add_index "questions", ["event_id"], :name => "index_questions_on_event_id"
@@ -71,14 +71,14 @@ ActiveRecord::Schema.define(:version => 20080903205953) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
-    t.integer  "preallowed_id",             :limit => 11
+    t.integer  "preallowed_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
   create_table "votes", :force => true do |t|
-    t.integer  "user_id",    :limit => 11
-    t.integer  "answer_id",  :limit => 11
+    t.integer  "user_id"
+    t.integer  "answer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

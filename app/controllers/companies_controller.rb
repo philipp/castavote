@@ -1,9 +1,9 @@
 class CompaniesController < ApplicationController
   skip_before_filter :check_preallowed_for_current_request
-
+  
   before_filter :login_required
   
-  before_filter :check_preallowed_for_current_client_request
+  before_filter :check_preallowed_for_current_client_request, :except => [:join, :toggle_admin]
   
 
 
@@ -164,5 +164,5 @@ class CompaniesController < ApplicationController
       @user_can_manage_company = current_user.can_manage_company?(@company)  if !@company.blank?      
     end
   end
-  
+    
 end
