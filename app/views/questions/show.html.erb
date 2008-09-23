@@ -31,22 +31,23 @@
 	</p>
 	<%end%>
 <%end%>
-	<p>
-		
-   <% 
-	height = @question.answers.length * 50 + 100
-	%>
-	
-   <%unless @question.votes.blank? %>
-	   <embed src="/FusionCharts/FCF_Bar2D.swf?chartWidth=800&chartHeight=<%=height%>" 
-	flashVars="&dataXML=<%=@xml_data%>"
-"
-		 quality="high" width="800" height="<%=height%>" name="FCF_Bar2D" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-	<%else%>
-		No votes yet...
-	<%end%>
-	</p>
 
+	<%if user_vote%>
+		<p>	
+		<% 
+		height = @question.answers.length * 50 + 100
+		%>
+
+		<%unless @question.votes.blank? %>
+		 <embed src="/FusionCharts/FCF_Bar2D.swf?chartWidth=800&chartHeight=<%=height%>" 
+		flashVars="&dataXML=<%=@xml_data%>"
+		"
+		quality="high" width="800" height="<%=height%>" name="FCF_Bar2D" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+		<%else%>
+		No votes yet...
+		<%end%>
+		</p>
+	<%end%>
 <%= link_to image_tag("back.png", :border => 0, :width => 16, :height => 16), company_event_path(@company, @event) %>
 
 
