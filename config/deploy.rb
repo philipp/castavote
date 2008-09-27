@@ -16,7 +16,7 @@ set :deploy_via, :remote_cache
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
-# this is a public access repository, can be used in readonly mode. The only way to change something in prod is through doing another prod deploy
+# this is a public repository, is used in readonly mode. The only way to change something in prod is through doing another prod deploy
 set :repository,  "git://github.com/dmitryame/castavote.git" 
 set :scm, "git"
 # set :scm_passphrase, "p@ssw0rd" #This is your custom users password
