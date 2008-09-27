@@ -1,10 +1,6 @@
 set :application, "castavote"
 
 default_run_options[:pty] = true
-set :repository,  "git://github.com/dmitryame/castavote.git"
-set :scm, "git"
-# set :scm_passphrase, "p@ssw0rd" #This is your custom users password
-set :user, "deployer"
 
 # ssh_options[:forward_agent] = true
 set :branch, "master"
@@ -20,8 +16,23 @@ set :deploy_via, :remote_cache
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
-# set :scm, :subversion
+# this is a public access repository, can be used in readonly mode. The only way to change something in prod is through doing another prod deploy
+set :repository,  "git://github.com/dmitryame/castavote.git" 
+set :scm, "git"
+# set :scm_passphrase, "p@ssw0rd" #This is your custom users password
+set :user, "deployer"
 
 role :app, "echowaves.com"
 role :web, "echowaves.com"
 role :db,  "echowaves.com", :primary => true
+
+
+namespace :deploy do
+  
+  task :copy_prod_configuration do
+    run "cp /u/config/#{application}/database.yml #{release_path}/config/"
+    run "cp /u/config/#{application}/environment.rb #{release_path}/config/"
+  end
+  
+  after "deploy:update_code", "deploy:copy_prod_configuration"
+end
