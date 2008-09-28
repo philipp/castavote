@@ -5,6 +5,7 @@ default_run_options[:pty] = true
 # ssh_options[:forward_agent] = true
 set :branch, "master"
 set :deploy_via, :remote_cache
+set :runner, nil
 # set :git_shallow_clone, 1
 
 # set :deploy_to, "/u/apps/#{application}"
@@ -19,6 +20,9 @@ set :deploy_via, :remote_cache
 # this is a public repository, is used in readonly mode. The only way to change something in prod is through doing another prod deploy
 set :repository,  "git://github.com/dmitryame/castavote.git" 
 set :scm, "git"
+
+#set :mongrel_conf, "#{deploy_to}/current/config/mongrel_cluster.yml"
+
 # set :scm_passphrase, "p@ssw0rd" #This is your custom users password
 set :user, "deployer"
 
