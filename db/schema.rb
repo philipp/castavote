@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080903205953) do
+ActiveRecord::Schema.define(:version => 20081002201807) do
 
   create_table "answers", :force => true do |t|
     t.string   "value"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20080903205953) do
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
     t.integer  "preallowed_id"
+    t.string   "password_reset_code",       :limit => 40
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

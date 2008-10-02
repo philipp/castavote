@@ -114,6 +114,15 @@ class User < ActiveRecord::Base
     @role.remove_from_subject(Subject.find(self.preallowed_id))      
   end
 
+  def forgot_password
+    @forgotten_password = true
+    self.make_password_reset_code
+  end
+  # same as make_activation_code
+  def make_password_reset_code
+    self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+  end
+
   protected
     
 
