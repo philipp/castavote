@@ -123,6 +123,20 @@ class User < ActiveRecord::Base
     self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
   end
 
+
+  #used in user_observer
+  def recently_forgot_password?
+    @forgotten_password
+  end
+  
+  def recently_reset_password?
+    @reset_password
+  end
+  
+  def self.find_for_forget(email)
+    find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email]
+  end
+
   protected
     
 
